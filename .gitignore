@@ -1,0 +1,40 @@
+# Virtual Environment
+venv/
+env/
+*.pyc
+__pycache__/
+*.pyo
+
+# Ignore Django Migrations (Optional: Keep If You Don't Want Old Migrations)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Secret Files (Never Push Credentials)
+credentials.json
+*.env
+.env
+config.json
+
+# Ignore Database Files (If Using SQLite)
+db.sqlite3
+*.db
+
+# Logs & Debug Files
+logs/
+*.log
+*.out
+*.pid
+
+# Ignore Media & Uploads (If Using Cloud Storage Instead)
+media/
+uploads/
+
+# Ignore Celery + Redis Temporary Files
+celerybeat-schedule
+*.pid
+*.sock
+__pycache__/
+
+# Ignore MacOS & System Files
+.DS_Store
+Thumbs.db
