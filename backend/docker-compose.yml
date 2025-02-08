@@ -1,0 +1,33 @@
+
+services:
+  django:
+    build: .
+    container_name: django_app
+    ports:
+      - "8000:8080"
+    environment:
+      - DEBUG=True
+      - CELERY_BROKER_URL=redis://redis:6379/0 
+    volumes:
+      - .:/app
+      - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads  # ✅ Ensure Django saves files here
+    depends_on:
+      - redis  # ✅ Remove Celery dependency here
+
+  celery_worker:
+    build: .
+    container_name: celery_worker
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    volumes:
+      - .:/app
+      - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads  # ✅ Ensure Celery has access to files
+    depends_on:
+      - redis  # ✅ Celery only depends on Redis, not Django
+
+  redis:
+    image: redis:alpine
+    container_name: redis_server
+    restart: always
+    ports:
+      - "6379:6379"
