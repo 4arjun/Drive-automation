@@ -10,9 +10,9 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0 
     volumes:
       - .:/app
-      - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads  # ✅ Ensure Django saves files here
+      - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads  
     depends_on:
-      - redis  # ✅ Remove Celery dependency here
+      - redis  
 
   celery_worker:
     build: .
@@ -21,9 +21,9 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0
     volumes:
       - .:/app
-      - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads  # ✅ Ensure Celery has access to files
+      - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads 
     depends_on:
-      - redis  # ✅ Celery only depends on Redis, not Django
+      - redis 
 
   redis:
     image: redis:alpine
