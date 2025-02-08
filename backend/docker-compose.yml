@@ -17,13 +17,16 @@ services:
   celery_worker:
     build: .
     container_name: celery_worker
+    restart: always
+    command: celery -A backend worker --loglevel=info 
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
+    depends_on:
+      - redis
     volumes:
       - .:/app
       - /Users/arjun/Desktop/rec/backend/uploads:/app/uploads 
-    depends_on:
-      - redis 
+
 
   redis:
     image: redis:alpine
